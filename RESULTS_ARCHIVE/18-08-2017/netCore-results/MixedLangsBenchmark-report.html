@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>MixedLangsBenchmark</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.10.9, OS=Windows 10 Redstone 1 (10.0.14393)
+Processor=Intel Core i7-4790 CPU 3.60GHz (Haswell), ProcessorCount=8
+Frequency=3515620 Hz, Resolution=284.4448 ns, Timer=TSC
+.NET Core SDK=2.0.0
+  [Host]     : .NET Core 2.0.0 (Framework 4.6.00001.0), 64bit RyuJIT
+  Job-HRRVQD : .NET Core 2.0.0 (Framework 4.6.00001.0), 64bit RyuJIT
+  Core       : .NET Core 2.0.0 (Framework 4.6.00001.0), 64bit RyuJIT
+</code></pre>
+<pre><code>Platform=X64  Runtime=Core  Concurrent=True  
+</code></pre>
+
+<table>
+<thead><tr><th>          Method</th><th>Job</th><th>Server</th><th>ExperimentIdx</th><th>     Mean</th><th>   Error</th><th>  StdDev</th><th>Scaled</th><th>ScaledSD</th><th>Gen 0</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>       'C# safe'</td><td>Default</td><td>True</td><td>      0</td><td>538.74 ns</td><td>3.0073 ns</td><td>2.5112 ns</td><td>1.00</td><td>0.00</td><td>0.0019</td><td>216 B</td>
+</tr><tr><td>    'C# unsafe1'</td><td>Default</td><td>True</td><td>      0</td><td>358.10 ns</td><td>1.0958 ns</td><td>1.0250 ns</td><td>0.66</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td>    'C# unsafe2'</td><td>Default</td><td>True</td><td>      0</td><td>331.15 ns</td><td>2.3080 ns</td><td>2.0460 ns</td><td>0.61</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td>'Native C: dummy call'</td><td>Default</td><td>True</td><td>      0</td><td> 85.11 ns</td><td>0.4480 ns</td><td>0.4190 ns</td><td>0.16</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td>      'Native C'</td><td>Default</td><td>True</td><td>      0</td><td>475.81 ns</td><td>3.0655 ns</td><td>2.7175 ns</td><td>0.88</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td> 'F# imperative'</td><td>Default</td><td>True</td><td>      0</td><td>900.95 ns</td><td>3.1253 ns</td><td>2.9234 ns</td><td>1.67</td><td>0.01</td><td>0.0068</td><td>648 B</td>
+</tr><tr><td> 'F# functional'</td><td>Default</td><td>True</td><td>      0</td><td>1,061.14 ns</td><td>14.3747 ns</td><td>13.4461 ns</td><td>1.97</td><td>0.03</td><td>0.0131</td><td>1216 B</td>
+</tr><tr><td>       'C# safe'</td><td>Core</td><td>False</td><td>      0</td><td>541.57 ns</td><td>6.2821 ns</td><td>5.8763 ns</td><td>1.00</td><td>0.00</td><td>0.0505</td><td>216 B</td>
+</tr><tr><td>    'C# unsafe1'</td><td>Core</td><td>False</td><td>      0</td><td>363.63 ns</td><td>3.1623 ns</td><td>2.9580 ns</td><td>0.67</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>    'C# unsafe2'</td><td>Core</td><td>False</td><td>      0</td><td>335.91 ns</td><td>6.5953 ns</td><td>7.0569 ns</td><td>0.62</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>'Native C: dummy call'</td><td>Core</td><td>False</td><td>      0</td><td> 84.59 ns</td><td>0.5933 ns</td><td>0.5550 ns</td><td>0.16</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td>      'Native C'</td><td>Core</td><td>False</td><td>      0</td><td>473.79 ns</td><td>4.2467 ns</td><td>3.9724 ns</td><td>0.87</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td> 'F# imperative'</td><td>Core</td><td>False</td><td>      0</td><td>897.00 ns</td><td>5.2957 ns</td><td>4.9536 ns</td><td>1.66</td><td>0.02</td><td>0.1535</td><td>648 B</td>
+</tr><tr><td> 'F# functional'</td><td>Core</td><td>False</td><td>      0</td><td>1,062.39 ns</td><td>7.0171 ns</td><td>6.5638 ns</td><td>1.96</td><td>0.02</td><td>0.2880</td><td>1216 B</td>
+</tr><tr><td>       'C# safe'</td><td>Default</td><td>True</td><td>      1</td><td>11,979.62 ns</td><td>102.7986 ns</td><td>96.1578 ns</td><td>1.00</td><td>0.00</td><td>-</td><td>624 B</td>
+</tr><tr><td>    'C# unsafe1'</td><td>Default</td><td>True</td><td>      1</td><td>9,294.00 ns</td><td>62.7820 ns</td><td>58.7263 ns</td><td>0.78</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>    'C# unsafe2'</td><td>Default</td><td>True</td><td>      1</td><td>7,388.14 ns</td><td>42.8343 ns</td><td>40.0672 ns</td><td>0.62</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>'Native C: dummy call'</td><td>Default</td><td>True</td><td>      1</td><td>153.53 ns</td><td>1.5100 ns</td><td>1.3386 ns</td><td>0.01</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td>      'Native C'</td><td>Default</td><td>True</td><td>      1</td><td>6,106.58 ns</td><td>56.4283 ns</td><td>52.7831 ns</td><td>0.51</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td> 'F# imperative'</td><td>Default</td><td>True</td><td>      1</td><td>13,474.52 ns</td><td>97.2986 ns</td><td>86.2527 ns</td><td>1.12</td><td>0.01</td><td>0.0153</td><td>1488 B</td>
+</tr><tr><td> 'F# functional'</td><td>Default</td><td>True</td><td>      1</td><td>14,401.88 ns</td><td>116.2812 ns</td><td>108.7695 ns</td><td>1.20</td><td>0.01</td><td>0.0305</td><td>3736 B</td>
+</tr><tr><td>       'C# safe'</td><td>Core</td><td>False</td><td>      1</td><td>11,942.92 ns</td><td>115.2343 ns</td><td>107.7903 ns</td><td>1.00</td><td>0.00</td><td>0.1373</td><td>624 B</td>
+</tr><tr><td>    'C# unsafe1'</td><td>Core</td><td>False</td><td>      1</td><td>11,784.41 ns</td><td>184.3935 ns</td><td>172.4818 ns</td><td>0.99</td><td>0.02</td><td>-</td><td>0 B</td>
+</tr><tr><td>    'C# unsafe2'</td><td>Core</td><td>False</td><td>      1</td><td>7,475.63 ns</td><td>77.0671 ns</td><td>72.0886 ns</td><td>0.63</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>'Native C: dummy call'</td><td>Core</td><td>False</td><td>      1</td><td>158.50 ns</td><td>1.8578 ns</td><td>1.7378 ns</td><td>0.01</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td>      'Native C'</td><td>Core</td><td>False</td><td>      1</td><td>6,133.86 ns</td><td>51.8295 ns</td><td>48.4813 ns</td><td>0.51</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td> 'F# imperative'</td><td>Core</td><td>False</td><td>      1</td><td>13,461.67 ns</td><td>116.2124 ns</td><td>108.7051 ns</td><td>1.13</td><td>0.01</td><td>0.3510</td><td>1488 B</td>
+</tr><tr><td> 'F# functional'</td><td>Core</td><td>False</td><td>      1</td><td>15,118.95 ns</td><td>80.7492 ns</td><td>75.5329 ns</td><td>1.27</td><td>0.01</td><td>0.8850</td><td>3736 B</td>
+</tr><tr><td>       'C# safe'</td><td>Default</td><td>True</td><td>      2</td><td>65,547.75 ns</td><td>815.6701 ns</td><td>762.9783 ns</td><td>1.00</td><td>0.00</td><td>-</td><td>1296 B</td>
+</tr><tr><td>    'C# unsafe1'</td><td>Default</td><td>True</td><td>      2</td><td>51,060.22 ns</td><td>225.7926 ns</td><td>200.1592 ns</td><td>0.78</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>    'C# unsafe2'</td><td>Default</td><td>True</td><td>      2</td><td>33,957.79 ns</td><td>171.9349 ns</td><td>160.8280 ns</td><td>0.52</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>'Native C: dummy call'</td><td>Default</td><td>True</td><td>      2</td><td>279.27 ns</td><td>3.9443 ns</td><td>3.6895 ns</td><td>0.00</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td>      'Native C'</td><td>Default</td><td>True</td><td>      2</td><td>31,151.45 ns</td><td>216.9273 ns</td><td>202.9139 ns</td><td>0.48</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td> 'F# imperative'</td><td>Default</td><td>True</td><td>      2</td><td>69,906.31 ns</td><td>281.6685 ns</td><td>263.4729 ns</td><td>1.07</td><td>0.01</td><td>-</td><td>2696 B</td>
+</tr><tr><td> 'F# functional'</td><td>Default</td><td>True</td><td>      2</td><td>70,444.98 ns</td><td>509.0139 ns</td><td>425.0496 ns</td><td>1.07</td><td>0.01</td><td>-</td><td>7584 B</td>
+</tr><tr><td>       'C# safe'</td><td>Core</td><td>False</td><td>      2</td><td>64,836.90 ns</td><td>235.8334 ns</td><td>220.5987 ns</td><td>1.00</td><td>0.00</td><td>0.2441</td><td>1296 B</td>
+</tr><tr><td>    'C# unsafe1'</td><td>Core</td><td>False</td><td>      2</td><td>51,474.85 ns</td><td>292.4875 ns</td><td>273.5930 ns</td><td>0.79</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td>    'C# unsafe2'</td><td>Core</td><td>False</td><td>      2</td><td>37,529.07 ns</td><td>435.8763 ns</td><td>386.3930 ns</td><td>0.58</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>'Native C: dummy call'</td><td>Core</td><td>False</td><td>      2</td><td>265.96 ns</td><td>1.8773 ns</td><td>1.7560 ns</td><td>0.00</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td>      'Native C'</td><td>Core</td><td>False</td><td>      2</td><td>30,922.10 ns</td><td>154.7759 ns</td><td>129.2449 ns</td><td>0.48</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td> 'F# imperative'</td><td>Core</td><td>False</td><td>      2</td><td>69,785.76 ns</td><td>887.7102 ns</td><td>830.3646 ns</td><td>1.08</td><td>0.01</td><td>0.6104</td><td>2696 B</td>
+</tr><tr><td> 'F# functional'</td><td>Core</td><td>False</td><td>      2</td><td>73,914.04 ns</td><td>1,069.7269 ns</td><td>1,000.6231 ns</td><td>1.14</td><td>0.02</td><td>1.7090</td><td>7584 B</td>
+</tr><tr><td>       'C# safe'</td><td>Default</td><td>True</td><td>      3</td><td>1,730,576.27 ns</td><td>13,197.8046 ns</td><td>12,345.2334 ns</td><td>1.00</td><td>0.00</td><td>-</td><td>6096 B</td>
+</tr><tr><td>    'C# unsafe1'</td><td>Default</td><td>True</td><td>      3</td><td>1,398,195.27 ns</td><td>18,487.5721 ns</td><td>17,293.2847 ns</td><td>0.81</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>    'C# unsafe2'</td><td>Default</td><td>True</td><td>      3</td><td>996,293.87 ns</td><td>9,236.7302 ns</td><td>7,713.0873 ns</td><td>0.58</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>'Native C: dummy call'</td><td>Default</td><td>True</td><td>      3</td><td>1,024.19 ns</td><td>9.2586 ns</td><td>8.6605 ns</td><td>0.00</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td>      'Native C'</td><td>Default</td><td>True</td><td>      3</td><td>901,271.04 ns</td><td>4,453.5687 ns</td><td>4,165.8705 ns</td><td>0.52</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td> 'F# imperative'</td><td>Default</td><td>True</td><td>      3</td><td>1,794,556.68 ns</td><td>18,353.5176 ns</td><td>17,167.8901 ns</td><td>1.04</td><td>0.01</td><td>-</td><td>10616 B</td>
+</tr><tr><td> 'F# functional'</td><td>Default</td><td>True</td><td>      3</td><td>1,765,011.40 ns</td><td>14,644.8550 ns</td><td>13,698.8051 ns</td><td>1.02</td><td>0.01</td><td>-</td><td>34704 B</td>
+</tr><tr><td>       'C# safe'</td><td>Core</td><td>False</td><td>      3</td><td>1,754,549.06 ns</td><td>8,298.6493 ns</td><td>7,762.5610 ns</td><td>1.00</td><td>0.00</td><td>-</td><td>6096 B</td>
+</tr><tr><td>    'C# unsafe1'</td><td>Core</td><td>False</td><td>      3</td><td>1,413,401.19 ns</td><td>14,310.4882 ns</td><td>13,386.0383 ns</td><td>0.81</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>    'C# unsafe2'</td><td>Core</td><td>False</td><td>      3</td><td>1,001,220.30 ns</td><td>4,065.3133 ns</td><td>3,802.6963 ns</td><td>0.57</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td>'Native C: dummy call'</td><td>Core</td><td>False</td><td>      3</td><td>1,035.56 ns</td><td>6.6056 ns</td><td>6.1789 ns</td><td>0.00</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td>      'Native C'</td><td>Core</td><td>False</td><td>      3</td><td>920,869.57 ns</td><td>1,711.3860 ns</td><td>1,517.0989 ns</td><td>0.52</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td> 'F# imperative'</td><td>Core</td><td>False</td><td>      3</td><td>1,821,238.99 ns</td><td>7,935.7709 ns</td><td>7,034.8535 ns</td><td>1.04</td><td>0.01</td><td>1.9531</td><td>10616 B</td>
+</tr><tr><td> 'F# functional'</td><td>Core</td><td>False</td><td>      3</td><td>1,841,810.80 ns</td><td>11,675.2307 ns</td><td>10,921.0170 ns</td><td>1.05</td><td>0.01</td><td>7.8125</td><td>34704 B</td>
+</tr><tr><td>       'C# safe'</td><td>Default</td><td>True</td><td>      4</td><td>6,222,547.70 ns</td><td>41,777.9236 ns</td><td>39,079.0919 ns</td><td>1.00</td><td>0.00</td><td>-</td><td>12096 B</td>
+</tr><tr><td>    'C# unsafe1'</td><td>Default</td><td>True</td><td>      4</td><td>4,703,410.49 ns</td><td>48,355.2269 ns</td><td>42,865.6450 ns</td><td>0.76</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>    'C# unsafe2'</td><td>Default</td><td>True</td><td>      4</td><td>3,507,611.06 ns</td><td>31,849.5486 ns</td><td>29,792.0846 ns</td><td>0.56</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>'Native C: dummy call'</td><td>Default</td><td>True</td><td>      4</td><td>1,811.47 ns</td><td>11.9663 ns</td><td>11.1933 ns</td><td>0.00</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td>      'Native C'</td><td>Default</td><td>True</td><td>      4</td><td>3,231,215.15 ns</td><td>36,438.0133 ns</td><td>34,084.1369 ns</td><td>0.52</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td> 'F# imperative'</td><td>Default</td><td>True</td><td>      4</td><td>6,360,685.94 ns</td><td>43,296.7509 ns</td><td>40,499.8037 ns</td><td>1.02</td><td>0.01</td><td>-</td><td>20736 B</td>
+</tr><tr><td> 'F# functional'</td><td>Default</td><td>True</td><td>      4</td><td>6,437,765.61 ns</td><td>47,134.1258 ns</td><td>39,359.1260 ns</td><td>1.03</td><td>0.01</td><td>-</td><td>68824 B</td>
+</tr><tr><td>       'C# safe'</td><td>Core</td><td>False</td><td>      4</td><td>6,215,175.32 ns</td><td>48,224.7631 ns</td><td>45,109.4689 ns</td><td>1.00</td><td>0.00</td><td>-</td><td>12096 B</td>
+</tr><tr><td>    'C# unsafe1'</td><td>Core</td><td>False</td><td>      4</td><td>4,842,739.92 ns</td><td>27,722.5344 ns</td><td>24,575.3022 ns</td><td>0.78</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>    'C# unsafe2'</td><td>Core</td><td>False</td><td>      4</td><td>3,536,283.47 ns</td><td>26,089.6000 ns</td><td>24,404.2257 ns</td><td>0.57</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td>'Native C: dummy call'</td><td>Core</td><td>False</td><td>      4</td><td>1,818.71 ns</td><td>12.4343 ns</td><td>11.6310 ns</td><td>0.00</td><td>0.00</td><td>-</td><td>0 B</td>
+</tr><tr><td>      'Native C'</td><td>Core</td><td>False</td><td>      4</td><td>3,213,397.61 ns</td><td>32,874.8901 ns</td><td>30,751.1896 ns</td><td>0.52</td><td>0.01</td><td>-</td><td>0 B</td>
+</tr><tr><td> 'F# imperative'</td><td>Core</td><td>False</td><td>      4</td><td>6,467,313.12 ns</td><td>20,795.1090 ns</td><td>18,434.3206 ns</td><td>1.04</td><td>0.01</td><td>-</td><td>20736 B</td>
+</tr><tr><td> 'F# functional'</td><td>Core</td><td>False</td><td>      4</td><td>6,727,460.12 ns</td><td>22,285.2414 ns</td><td>20,845.6266 ns</td><td>1.08</td><td>0.01</td><td>15.6250</td><td>68824 B</td>
+</tr></tbody></table>
+</body>
+</html>
