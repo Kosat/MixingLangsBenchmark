@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "levenshtein-C", "levenshtein-C\levenshtein-C.vcxproj", "{6FEE87B4-8E95-41C7-A8DD-FC7A71AD34D8}"
 EndProject
